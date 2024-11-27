@@ -35,10 +35,8 @@ jobs:
       run: npm test
 
     - name: Merge into dev
-      uses: devops-infra/action-merge-branch@v2.0
+      uses: peter-evans/create-pull-request@v5
       with:
-        type: merge
-        source_branch: ${{ github.head_ref }}
-        target_branch: dev
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: dev
+        delete-branch: true

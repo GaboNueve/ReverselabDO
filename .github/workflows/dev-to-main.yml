@@ -46,10 +46,8 @@ jobs:
         docker-compose push
 
     - name: Merge into main
-      uses: devops-infra/action-merge-branch@v2.0
+      uses: peter-evans/create-pull-request@v5
       with:
-        type: merge
-        source_branch: dev
-        target_branch: main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
+        delete-branch: true
