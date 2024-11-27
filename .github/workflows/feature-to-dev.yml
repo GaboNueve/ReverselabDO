@@ -1,0 +1,44 @@
+name: Feature to Dev Workflow
+
+on:
+  push:
+    branches:
+      - "feature/*"  # Déclenche pour toutes les branches qui commencent par "feature/"
+
+jobs:
+  test-and-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Changez la version si nécessaire
+
+    - name: Install dependencies (Frontend)
+      working-directory: ./frontend
+      run: npm install
+
+    - name: Install dependencies (Backend)
+      working-directory: ./backend
+      run: npm install
+
+    - name: Run unit tests (Frontend)
+      working-directory: ./frontend
+      run: npm test
+
+    - name: Run unit tests (Backend)
+      working-directory: ./backend
+      run: npm test
+
+    - name: Merge into dev
+      uses: devops-infra/action-merge-branch@v2.0
+      with:
+        type: merge
+        source_branch: ${{ github.head_ref }}
+        target_branch: dev
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
