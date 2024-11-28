@@ -1,7 +1,7 @@
 {
     "name": "reverse-todo-backend",
     "version": "1.0.0",
-    "description": "Backend for Reverse Todo List App",
+    "description": "Backend for  Reverse Todo List App",
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
