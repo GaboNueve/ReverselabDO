@@ -43,7 +43,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-        docker-compose push
+        docker compose push
 
     - name: Merge into main
       uses: peter-evans/create-pull-request@v5
