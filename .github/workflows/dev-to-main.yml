@@ -36,7 +36,11 @@ jobs:
       - name: Run frontend unit tests
         working-directory: ./frontend
         run: npm test
- 
+
+      - name: Fix Jest permissions
+         run: chmod +x ./node_modules/.bin/jest
+
+
       - name: Merge dev into main
         if: success()
         uses: pascalgn/automerge-action@v0.14.3
